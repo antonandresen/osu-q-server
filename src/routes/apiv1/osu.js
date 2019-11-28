@@ -90,4 +90,19 @@ router.get("/profile", auth, async (req, res) => {
   }
 });
 
+// @route   GET api/v1/osu/leaderboard
+// @desc    Get Osu Leaderboard
+// @access  Public
+router.get("/leaderboard", async (req, res) => {
+  try {
+    const leaderboard = await OsuProfile.find({}).sort("rating");
+    return res.status(200).json(leaderboard);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      msg: "Server error"
+    });
+  }
+});
+
 module.exports = router;
