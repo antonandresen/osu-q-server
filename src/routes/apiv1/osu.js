@@ -96,13 +96,13 @@ router.get("/profile", auth, async (req, res) => {
 router.get("/leaderboard", async (req, res) => {
   try {
     const leaderboard = await OsuProfile.find({}).sort("rating");
-    leaderboard.forEach(async (player, ix) => {
+    for (let i = 0; i < leaderboard.length; i++) {
       // get the id for player and add username to return objects
       // so that we can display them on the frontend
-      const user = await User.findOne({ _id: player.user });
+      const user = await User.findOne({ _id: leaderboard[i].user });
       console.log("user", user);
       player.username = await getUsernameById(user.osu_userid);
-    });
+    }
     console.log("leaderboard", leaderboard);
     return res.status(200).json(leaderboard);
   } catch (err) {
