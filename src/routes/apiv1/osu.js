@@ -95,7 +95,9 @@ router.get("/profile", auth, async (req, res) => {
 // @access  Public
 router.get("/leaderboard", async (req, res) => {
   try {
-    const leaderboard = await OsuProfile.find({}).sort("rating");
+    const leaderboard = await OsuProfile.find({})
+      .sort("rating")
+      .lean();
     for (let i = 0; i < leaderboard.length; i++) {
       // get the id for player and add username to return objects
       // so that we can display them on the frontend
