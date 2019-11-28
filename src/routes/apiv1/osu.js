@@ -101,7 +101,7 @@ router.get("/leaderboard", async (req, res) => {
       // so that we can display them on the frontend
       const user = await User.findOne({ _id: leaderboard[i].user });
       console.log("user", user);
-      player.username = await getUsernameById(user.osu_userid);
+      leaderboard[i].username = await getUsernameById(user.osu_userid);
     }
     console.log("leaderboard", leaderboard);
     return res.status(200).json(leaderboard);
