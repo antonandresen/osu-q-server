@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "server": "nodemon src/index.js",
-    "build": "npm build --output public",
+    "build": "npm build",
     "test": "cross-env NODE_ENV=test mocha --timeout 5000 __tests__/src/**/**/*.test.js"
   },
   "keywords": [],
