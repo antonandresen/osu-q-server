@@ -6,7 +6,7 @@ const OsuVerifier = require("../../models/OsuVerifier");
 const OsuProfile = require("../../models/OsuProfile");
 const User = require("../../models/User");
 
-const { getIdByUsername } = require("../../osu/osubot");
+const { getIdByUsername, getUsernameById } = require("../../osu/osubot");
 
 const router = express.Router();
 
@@ -96,6 +96,12 @@ router.get("/profile", auth, async (req, res) => {
 router.get("/leaderboard", async (req, res) => {
   try {
     const leaderboard = await OsuProfile.find({}).sort("rating");
+    leaderboard.forEach(async (player, ix) => {
+      // get the id for player and add username to return objects
+      // so that we can display them on the frontend
+      const user = await User.findOne({ _id: player.user });
+      player["username"] = await getUsernameById(user.osu_userid);
+    });
     return res.status(200).json(leaderboard);
   } catch (err) {
     console.error(err);
