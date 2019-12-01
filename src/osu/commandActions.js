@@ -1,5 +1,7 @@
-const ADD_TO_QUEUE = 'ADD_TO_QUEUE';
+const ADD_TO_QUEUE = "ADD_TO_QUEUE";
+const REMOVE_FROM_QUEUE = "REMOVE_FROM_QUEUE";
 
 module.exports = {
   ADD_TO_QUEUE,
+  REMOVE_FROM_QUEUE
 };
