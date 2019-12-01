@@ -105,8 +105,9 @@ const getIdByUsername = async username => {
 const startGame = async (p1, p2) => {
   const beatmaps = [2002605, 1894677, 1253622, 1609590, 1915062]; //Short: 1361620
   let lobby;
+  let channel;
   try {
-    const channel = await client.createLobby(
+    channel = await client.createLobby(
       "osu-q Match " +
         Math.random()
           .toString(36)
