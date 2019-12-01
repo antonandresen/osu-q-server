@@ -3,10 +3,11 @@ const Banchojs = require("bancho.js");
 const handleCommand = require("./commands/handleCommand");
 const {
   addPlayerToQueue,
+  removePlayerFromQueue,
   queueSize,
   popFromQueue
 } = require("./playing/playQueue");
-const { ADD_TO_QUEUE } = require("./commandActions");
+const { ADD_TO_QUEUE, REMOVE_FROM_QUEUE } = require("./commandActions");
 
 const OsuProfile = require("../models/OsuProfile");
 const User = require("../models/User");
@@ -35,7 +36,6 @@ const connectOsuBot = async () => {
 
     client.on("PM", async message => {
       if (message.user.ircUsername === "AntoN") {
-        console.log("Msg sent from yourself!");
         return; // Was sent by bot.
       }
 
@@ -78,6 +78,10 @@ const connectOsuBot = async () => {
               await startGame(p1.username, p2.username);
               return;
             }
+            return;
+          case REMOVE_FROM_QUEUE:
+            const msg = removePlayerFromQueue(message.user.ircUsername);
+            await message.user.sendMessage(msg);
             return;
           default:
             break;

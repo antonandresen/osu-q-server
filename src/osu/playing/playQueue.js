@@ -28,12 +28,15 @@ const queueSize = () => {
 };
 
 const removePlayerFromQueue = username => {
+  let msg;
   const index = queue.findIndex(obj => obj.username === username);
   if (index > -1) {
     queue.splice(index, 1);
-    return true;
+    msg = "You have been removed from the queue";
+  } else {
+    return "You are not in a queue";
   }
-  return false;
+  return msg;
 };
 
 const popFromQueue = () => {
