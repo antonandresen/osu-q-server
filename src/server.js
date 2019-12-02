@@ -20,7 +20,7 @@ connectDB();
 connectOsuBot();
 
 // Middlewares.
-app.use(cors()); // Cors headers.
+app.use(cors()); // Cors headerss.
 app.use(express.json({ extended: false })); // Parse JSON.
 app.use(helmet()); // Security headers.
 
