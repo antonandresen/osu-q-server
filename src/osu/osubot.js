@@ -80,7 +80,7 @@ const connectOsuBot = async () => {
             }
             return;
           case REMOVE_FROM_QUEUE:
-            const msg = removePlayerFromQueue(message.user.ircUsername);
+            msg = removePlayerFromQueue(message.user.ircUsername);
             await message.user.sendMessage(msg);
             return;
           default:
